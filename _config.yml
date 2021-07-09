@@ -1,21 +1,2 @@
 theme: jekyll-theme-minimal
 
-
-# Site settings
-title:BeauWorldForMe's Blog
-SEOTitle:BeauWorldForMe的博客|BeauWorldForMe's Blog
-header-img:img/background1.jpg
-email:15200002186@163.com
-description:"Want all easy a little"
-keyword:""
-url:"https://beauworldforme.github.io/"
-
-#SNS settings
-RSS:false
-#weibo_username:
-github_username:BeauWorldForMe
-#zhihu_username:
-#twitter_username:
-#facebook_username: 
-
-
