@@ -66,3 +66,117 @@ VALUES ('ma',30,10.11),
 
 ## 向多表插入数据
 
+```MYSQL
+SELECT LAST_INSERT_ID()
+```
+
+## 表复制
+
+```mysql
+CREATE TABLE abc AS
+SELECT * FROM orders
+```
+
+选择语句也可以作为插入语句的子查询，比如：
+
+```mysql
+INSERT INTO orders_archived
+SELECT *
+FROM orders
+WHERE order_date < '2019-01-01'
+```
+
+
+
+## 前面的练习
+
+```mysql
+USE sql_invoicing;
+
+CREATE TABLE invoices_archived AS
+SELECT 
+	i.invoice_id,
+    i.number,
+    c.name AS client,
+    i.invoice_total,
+    i.payment_total,
+    i.invoice_date,
+    i.payment_date,
+    i.due_date
+FROM invoices i 
+Join clients c
+	USING(client_id)
+WHERE payment_date IS NOT NULL
+```
+
+![image-20210721170808940](C:\Users\15200\AppData\Roaming\Typora\typora-user-images\image-20210721170808940.png)
+
+
+
+## 更新单行
+
+```mysql
+UPDATE invoices
+SET payment_total = 10,payment_date = '2019-03-01'
+WHERE invoice_id = 1
+```
+
+```mysql
+UPDATE invoices
+SET 
+	payment_total = invoice_total*0.5,
+	payment_date = due_date
+WHERE invoice_id = 3
+```
+
+## 更新多行
+
+改WHERE语句
+
+![image-20210721171814945](C:\Users\15200\AppData\Roaming\Typora\typora-user-images\image-20210721171814945.png)
+
+上面取消勾选
+
+```mysql
+UPDATE invoices
+SET 
+	payment_total = invoice_total*0.5,
+	payment_date = due_date
+WHERE client_id = 3
+```
+
+```mysql
+USE sql_store;
+
+UPDATE customers
+SET points = points + 50
+WHERE birth_date < '1990-01-01'
+```
+
+## 用选择语句做UPDATE的子语句
+
+```mysql
+UPDATE invoices
+SET 
+	payment_total = invoice_total*0.5,
+	payment_date = due_date
+WHERE client_id = 
+            (sELECT client_id
+            FROM clients
+            WHERE name = 'Myworks')
+            #如果这里有多条，=要换为IN
+```
+
+## 删除行
+
+```mysql
+DELETE FROM invoices
+WHERE invoice_id = 1
+```
+
+很危险，删库要跑路
+
+## 恢复数据库
+
+fake news！
+
